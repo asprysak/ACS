@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div th:include="navigation :: menu"></div>
+<div class="col-xs-3">
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>Histogram</tr>
+        </thead>
+        <!--<tbody class="tbody-dark">-->
+        <!--<tbody th:each="entry: ${population}">-->
+        <!--<td th:text="${entry.key}"></td>-->
+        <!--<td th:text="${entry.value}"></td>-->
+        <!--</tbody>-->
+        </tr>
+
+    </table>
+
+</div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', "/makeHist", false);
+    xhr.send();
+
+    /*xhr.onreadystatechange = processRequest;*/
+
+    function processRequest(e) {
+	  if (xhr.readyState == 4 && xhr.status == 200) {
+        var response = JSON.parse(xhr.responseText);
+        alert(response.ip);
+        }
+    }
+    var response = JSON.parse(xhr.responseText);
+
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+    var map = response;
+    var table  = [ ['Age', 'Population' ] ];
+
+    for (var key in map) {
+        var t = [key, map[key]];
+        table.push(t);
+    }
+
+      var data = google.visualization.arrayToDataTable(table);
+
+      var view = new google.visualization.DataView(data);
+      /*view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);*/
+
+      var options = {
+        title: "Population by Age",
+        width: 600,
+        height: 400,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
+      chart.draw(view, options);
+  }
+  </script>
+<div id="barchart_values" style="width: 900px; height: 300px;"></div>
+
+</body>
+</html>
