@@ -1,8 +1,7 @@
 package anna.controller;
 
-import anna.service.StatesServiceImpl;
+import anna.service.PopulationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,12 +12,24 @@ import java.util.Map;
 public class PopulationRestController {
 
     @Autowired
-    private StatesServiceImpl service;
+    private PopulationServiceImpl service;
 
     @RequestMapping("/makeHist")
-    public Map<String, Integer> makeHist() throws IOException {
+    public Map<String, Integer> makeHist(String year, String state) throws IOException {
 
-        return service.makeHist("2016", "Nevada");
+        return service.makeHist(year, state);
 
     }
+
+//    @RequestMapping("/map")
+//    public String[][] findAll() {
+//
+//        String[][] result = new String[1][1];
+//        try {
+//            result =  service.findAll();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return result;
+//    }
 }

@@ -1,4 +1,4 @@
-package anna.domain;
+package anna.service;
 
 import com.google.gson.Gson;
 

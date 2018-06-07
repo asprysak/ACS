@@ -11,18 +11,16 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="container" th:fragment="menu">
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand">Menu</a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li><a href="/histForm">Draw a Histogram</a></li>
-            </ul>
-        </div>
+<div th:include="navigation :: menu"></div>
 
-    </nav>
+<div class="col-xs-3">
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>Home</tr>
+        </thead>
+
+        </tr>
+    </table>
 </div>
 </body>
 </html>

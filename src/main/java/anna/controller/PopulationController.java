@@ -1,46 +1,42 @@
 package anna.controller;
 
-import anna.service.StatesServiceImpl;
-import com.google.gson.*;
-import com.google.gson.reflect.TypeToken;
+import anna.domain.HistArgs;
+import anna.service.PopulationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 @Controller
 public class PopulationController {
 
     @Autowired
-    private StatesServiceImpl service;
+    private PopulationServiceImpl service;
 
-//    @RequestMapping("/map")
-//    public String[][] findAll() {
-//
-//        String[][] result = new String[1][1];
-//        try {
-//            result =  service.findAll();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return result;
-//    }
+    @RequestMapping("/home")
+    public String home(Model model) {
+        return "home";
+    }
 
-    @RequestMapping("/hist")
+    @GetMapping("/histForm")
     public String makeHist(Model model) {
 
-        model.addAttribute("population", new LinkedHashMap<>());
-        return "hist";
+        model.addAttribute("args", new HistArgs());
+        return "histForm";
+    }
 
+    @PostMapping("/histForm")
+    public String showFom(Model model, @ModelAttribute @Valid HistArgs args, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            return "histForm";
+        } else {
+            model.addAttribute("args", args);
+            return "hist";
+        }
     }
 
 }

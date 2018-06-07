@@ -1,6 +1,6 @@
 package anna.controller;
 
-import anna.service.StatesServiceImpl;
+import anna.service.PopulationServiceImpl;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
@@ -20,19 +20,7 @@ import java.util.Map;
 public class SController {
 
     @Autowired
-    private StatesServiceImpl service;
-
-//    @RequestMapping("/map")
-//    public String[][] findAll() {
-//
-//        String[][] result = new String[1][1];
-//        try {
-//            result =  service.findAll();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return result;
-//    }
+    private PopulationServiceImpl service;
 
     @RequestMapping("/histo")
     public String makeHist(Model model, @ModelAttribute @Valid LinkedHashMap<String, Integer> population) {

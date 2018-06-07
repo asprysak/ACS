@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div th:include="navigation :: menu"></div>
+
+<form th:action="@{/histForm}" th:object="${args}" method="post">
+    <div class="col-xs-3">
+        <div class="thumbnail">
+            <label for="year">Year:</label>
+            <input type="text" class="form-control" th:field="*{year}">
+            <td th:if="${#fields.hasErrors('year')}" th:errors="*{year}"></td>
+
+            <label for="state">State:</label>
+            <input type="text" class="form-control" th:field="*{state}">
+            <td th:if="${#fields.hasErrors('state')}" th:errors="*{state}"></td>
+
+        </div>
+
+        <button type="submit" class="btn btn-success">Submit</button>
+        <button type="reset" class="btn btn-warning">Reset</button>
+
+    </div>
+    </div>
+
+</form>
+</body>
+</html>

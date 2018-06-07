@@ -1,27 +1,25 @@
 package anna.service;
 
-import anna.domain.ApiResponder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 @Service
-public class StatesServiceImpl implements StatesService {
+public class PopulationServiceImpl implements PopulationService {
 
     private ApiResponder responder = new ApiResponder();
     private Map<String, String> states;
 
-    public StatesServiceImpl() throws IOException {
+    public PopulationServiceImpl() throws IOException {
         states = responder.cityCodes();
     }
 
-
     @Override
     public String[][] findAll() throws IOException {
+
         return responder.findAll();
     }
 
