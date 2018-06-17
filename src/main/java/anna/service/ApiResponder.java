@@ -1,6 +1,9 @@
 package anna.service;
 
 import com.google.gson.Gson;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,9 +14,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Service
 public class ApiResponder {
 
-    private  static final String key = ""; //Your key
+    private Environment environment;
+    private String key;
+
+    @Autowired
+    public ApiResponder(Environment environment) {
+        this.environment = environment;
+        this.key = environment.getProperty("census.key");
+    }
 
     public String[][] findAll() throws IOException {
 

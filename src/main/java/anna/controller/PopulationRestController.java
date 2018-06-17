@@ -11,8 +11,12 @@ import java.util.Map;
 @RestController
 public class PopulationRestController {
 
-    @Autowired
     private PopulationServiceImpl service;
+
+    @Autowired
+    public PopulationRestController(PopulationServiceImpl service) {
+        this.service = service;
+    }
 
     @RequestMapping("/makeHist")
     public Map<String, Integer> makeHist(String year, String state) throws IOException {

@@ -13,8 +13,12 @@ import javax.validation.Valid;
 @Controller
 public class PopulationController {
 
-    @Autowired
     private PopulationServiceImpl service;
+
+    @Autowired
+    public PopulationController(PopulationServiceImpl service) {
+        this.service = service;
+    }
 
     @RequestMapping("/home")
     public String home(Model model) {

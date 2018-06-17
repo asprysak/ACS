@@ -1,5 +1,6 @@
 package anna.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -10,11 +11,11 @@ import java.util.Map;
 @Service
 public class PopulationServiceImpl implements PopulationService {
 
-    private ApiResponder responder = new ApiResponder();
-    private Map<String, String> states;
+    private ApiResponder responder;
 
-    public PopulationServiceImpl() throws IOException {
-        states = responder.cityCodes();
+    @Autowired
+    public PopulationServiceImpl(ApiResponder responder) {
+        this.responder = responder;
     }
 
     @Override
